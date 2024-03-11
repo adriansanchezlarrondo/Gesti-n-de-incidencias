@@ -46,8 +46,10 @@ export const vistaComentarios = {
           }
   
           bdComentarios.push(nuevoComentario)
-  
           comentarios()
+
+          document.querySelector('#coment').value = ''
+          document.querySelector('#fecha').value = ''
         })
     
         document.querySelector('#btnVolver').addEventListener('click', (event) => {
