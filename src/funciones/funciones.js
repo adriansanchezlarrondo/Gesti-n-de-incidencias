@@ -1,4 +1,5 @@
 import { tickets } from "../bd/tickets"
+import { vistaComentarios } from "../vistas/vistaComentarios";
 
 // meto mi bd ticket en una bd ficticia
 let datosDB = tickets
@@ -89,6 +90,8 @@ export function Editar (e, ticketsPendientes, ticketsResueltos){
 
 export function Comentario (e, ticketsPendientes, ticketsResueltos){
     console.log('e.target.id', e.target.id)
+    document.querySelector('main').innerHTML = vistaComentarios.template
+    vistaComentarios.script()
 }
 
 export function Eliminar (e, ticketsPendientes, ticketsResueltos){
