@@ -10,9 +10,7 @@ export function Resolver (e, ticketsPendientes, ticketsResueltos){
     const idTicket = divTicket.dataset.ticketid
 
     let bdTicketPendientes = datosDB.filter((item) => item.id != idTicket && item.status == 0)
-    console.log('bdTicketPendientes', bdTicketPendientes);
     let bdTicketResueltos = datosDB.filter((item) => item.id == idTicket || item.status == 1)
-    console.log('bdTicketResueltos', bdTicketResueltos);
 
     let tablaPendiente = ''
     let tablaResuelto = ''
@@ -86,9 +84,10 @@ export function Resolver (e, ticketsPendientes, ticketsResueltos){
 
 export function Editar (e, ticketsPendientes, ticketsResueltos){
     console.log('e.target.id', e.target.id)
+
 }
 
-export function Comentar (e, ticketsPendientes, ticketsResueltos){
+export function Comentario (e, ticketsPendientes, ticketsResueltos){
     console.log('e.target.id', e.target.id)
 }
 
@@ -99,9 +98,7 @@ export function Eliminar (e, ticketsPendientes, ticketsResueltos){
     const idTicket = divTicket.dataset.ticketid
 
     let bdTicketPendientes = datosDB.filter((item) => item.id != idTicket && item.status == 0)
-    console.log('bdTicketPendientes', bdTicketPendientes);
     let bdTicketResueltos = datosDB.filter((item) => item.id != idTicket && item.status == 1)
-    console.log('bdTicketResueltos', bdTicketResueltos);
 
     let tablaPendiente = ''
     let tablaResuelto = ''
