@@ -28,7 +28,7 @@ export const header = {
         mail: "adrian@gmail.com",
         pass: "adri",
         log: 0,
-        rol: ''
+        rol: 'administrador'
       }
 
       usuarios.push(usuRegistrado)
