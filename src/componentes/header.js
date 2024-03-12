@@ -20,9 +20,23 @@ export const header = {
     </nav>
     `,
     script: () => {
+      const usuarios = []
+
+      const usuRegistrado = {
+        nombre: "Adrian",
+        apellido: "Sanchez",
+        mail: "adrian@gmail.com",
+        pass: "adri",
+        log: 0,
+        rol: ''
+      }
+
+      usuarios.push(usuRegistrado)
+      localStorage.setItem("usuarios", JSON.stringify(usuarios))
+      
       // Cargar vista panel si esta logueado o no
-      let usuariosGuardados = localStorage.getItem("usuarios")
-      usuariosGuardados = JSON.parse(usuariosGuardados)
+      // let usuariosGuardados = localStorage.getItem("usuarios")
+      // usuariosGuardados = JSON.parse(usuariosGuardados)
 
       for(let i=0 ; i < usuariosGuardados.length ; i++){
         if(usuariosGuardados[i].isLogin == 1){

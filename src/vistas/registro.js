@@ -35,50 +35,61 @@ export const registro = {
     </div>
     `,
     script: () => {
+      const nombre = document.querySelector('#nombre')
+      const apellidos = document.querySelector('#apellidos')
       const email = document.querySelector('#email')
       const password = document.querySelector('#password')
 
 
       document.querySelector('#enviar').addEventListener('click', (event) => {
         event.preventDefault()
+        const nombreValue = nombre.value
+        const apellidosValue = apellidos.value
         const emailValue = email.value
         const passwordValue = password.value
 
-        let usuariosGuardados = localStorage.getItem("usuarios")
+        if(!nombreValue || !apellidosValue || !emailValue || !passwordValue){
+          return alert('Complete todos los campos del registro')
+        }
 
-        if (!usuariosGuardados) {
-          usuariosGuardados = [];
+        const roles = ['alumno', 'profesor', 'administrador']
+        const random = Math.floor(Math.random() * roles.length)
+        console.log('rol registrado', roles[random])
+
+        const usuariosLocalStorage = localStorage.getItem('usuarios')
+
+        if (usuariosLocalStorage) {
+          usuariosLocalStorage = JSON.parse(usuariosLocalStorage)
         } else {
-          usuariosGuardados = JSON.parse(usuariosGuardados);
+          usuariosLocalStorage = []
         }
 
-        let existe = false 
-        for (let i = 0; i < usuariosGuardados.length; i++) {
-          if (emailValue === usuariosGuardados[i].mail) {
-            existe = true
-            i = usuariosGuardados.length
-          }
+        const usuRegistrado = {
+          nombre: nombreValue + ' ' + apellidosValue,
+          email: emailValue,
+          pass: passwordValue,
+          login: 0,
+          rol: roles[random],
         }
-        
-        if (!existe) {
-          usuariosGuardados.push({
-            mail: emailValue,
-            pass: passwordValue,
-            isLogin: 0
-          });
-          alert('Usuario registrado con éxito')
+
+
+        if (usuariosLocalStorage.length == 0){
+          usuariosLocalStorage.push(usuRegistrado)
+          localStorage.setItem('usuarios', JSON.stringify(usuariosLocalStorage))
           document.querySelector('main').innerHTML = login.template
           login.script()
         } else {
-          alert('Usuario ya registrado.')
-          document.querySelector('main').innerHTML = registro.template
-          registro.script()
+          usuariosLocalStorage.forEach(item => {
+            if (item.email != emailValue){
+              usuariosLocalStorage.push(usuRegistrado)
+              localStorage.setItem('usuarios', JSON.stringify(usuariosLocalStorage))
+              document.querySelector('main').innerHTML = login.template
+              login.script()    
+            } else {
+              alert('Este mail ya esta registrado')
+            }
+          })
         }
-
-        
-        // Guardamos en localstorage
-        localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados))
       })
     }
-
 }
