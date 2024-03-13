@@ -13,39 +13,34 @@ export const header = {
           <button id="registro" class="btn btn-secondary ms-2">REGISTRO</button>
         </div>
         <div>
-          <button id="cierreSesion" class="btn btn-secondary ms-2 me-2 d-none">CERRAR SESIÓN</button> 
           <span id="correo">administrador@fpllefia.com</span>
+          <button id="cierreSesion" class="btn btn-secondary ms-2 me-2 d-none">CERRAR SESIÓN</button> 
         </div>
       </div>
     </nav>
     `,
     script: () => {
-      const usuarios = []
+      // let usuarios = []
 
-      const usuRegistrado = {
-        nombre: "Adrian",
-        apellido: "Sanchez",
-        mail: "adrian@gmail.com",
-        pass: "adri",
-        log: 0,
-        rol: 'administrador'
-      }
+      // localStorage.setItem("usuarios", JSON.stringify(usuarios))
+      usuarios = localStorage.getItem("usuarios")
 
-      usuarios.push(usuRegistrado)
+      if (usuarios) {
+        usuarios = JSON.parse(usuarios)
+
+        for(let i=0 ; i < usuarios.length ; i++){
+          if(usuarios[i].login == 1){
+            document.querySelector('main').innerHTML = panel.template
+            panel.script()
+            document.querySelector('#correo').innerHTML = usuarios[i].email
+          }
+        }  
+      } else {
+        usuarios = []
+      } 
+
       localStorage.setItem("usuarios", JSON.stringify(usuarios))
       
-      // Cargar vista panel si esta logueado o no
-      // let usuariosGuardados = localStorage.getItem("usuarios")
-      // usuariosGuardados = JSON.parse(usuariosGuardados)
-
-      for(let i=0 ; i < usuariosGuardados.length ; i++){
-        if(usuariosGuardados[i].isLogin == 1){
-          document.querySelector('main').innerHTML = panel.template
-          document.querySelector('#correo').innerHTML = usuariosGuardados[i].mail
-          panel.script()
-        }
-      }
-
       document.querySelector('#login').addEventListener('click', () => {
           document.querySelector('main').innerHTML = login.template
           login.script()

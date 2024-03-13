@@ -54,9 +54,9 @@ export const registro = {
 
         const roles = ['alumno', 'profesor', 'administrador']
         const random = Math.floor(Math.random() * roles.length)
-        console.log('rol registrado', roles[random])
+        console.log('rol registrado: ', roles[random])
 
-        const usuariosLocalStorage = localStorage.getItem('usuarios')
+        let usuariosLocalStorage = localStorage.getItem('usuarios')
 
         if (usuariosLocalStorage) {
           usuariosLocalStorage = JSON.parse(usuariosLocalStorage)
@@ -64,14 +64,14 @@ export const registro = {
           usuariosLocalStorage = []
         }
 
-        const usuRegistrado = {
-          nombre: nombreValue + ' ' + apellidosValue,
+        const usuRegistrado = {  
+          nombre: nombreValue,
+          apellido: apellidosValue,
           email: emailValue,
           pass: passwordValue,
           login: 0,
           rol: roles[random],
         }
-
 
         if (usuariosLocalStorage.length == 0){
           usuariosLocalStorage.push(usuRegistrado)

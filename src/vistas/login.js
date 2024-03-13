@@ -47,32 +47,20 @@ export const login = {
             const passwdValue = passwd.value
 
             let usuariosGuardados = localStorage.getItem("usuarios")
-
             if (!usuariosGuardados) {
                 usuariosGuardados = [];
             } else {
                 usuariosGuardados = JSON.parse(usuariosGuardados)
             }
-            
-            let error = 0
-            for(let i=0 ; i < usuariosGuardados.length ; i++){
-                if(emailValue == usuariosGuardados[i].mail && passwdValue == usuariosGuardados[i].pass){
-                    usuariosGuardados[i].isLogin = 1
-                    localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados))
-                    alert('¡Inicio de sesión exitoso!')
-                    document.querySelector('main').innerHTML = panel.template
-                    panel.script()
-                    // valores para salir del bucle y para reiniciar elemtentos
-                    i = usuariosGuardados.length
-                    error = 0
-                    document.querySelector('#correo').innerHTML = emailValue
-                    document.querySelector('#cierreSesion').classList.remove('d-none')
-                } else {
-                    error++
-                }
-            }
 
-            if(error != 0){
+            const usuarioEncontrado = usuariosGuardados.find(usuari => usuari.email == emailValue && usuari.pass == passwdValue)
+            const IDusuarioEncontrado = usuariosGuardados.findIndex(usuari => usuari.email == emailValue && usuari.pass == passwdValue)
+            if (usuarioEncontrado) {
+                usuariosGuardados[IDusuarioEncontrado].login = 1
+                localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados))
+                document.querySelector('main').innerHTML = panel.template
+                panel.script()
+            } else {
                 alert('El email o contraseña son incorrectos, pruebe con otras a cambiarlos.')
             }
         })
