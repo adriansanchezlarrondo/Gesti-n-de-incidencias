@@ -20,10 +20,10 @@ export const header = {
     </nav>
     `,
     script: () => {
-      let usuarios = []
+      // let usuarios = []
 
-      localStorage.setItem("usuarios", JSON.stringify(usuarios))
-      usuarios = localStorage.getItem("usuarios")
+      // localStorage.setItem("usuarios", JSON.stringify(usuarios))
+      let usuarios = localStorage.getItem("usuarios")
 
       if (usuarios) {
         usuarios = JSON.parse(usuarios)
