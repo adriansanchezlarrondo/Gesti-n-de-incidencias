@@ -20,27 +20,27 @@ export const header = {
     </nav>
     `,
     script: () => {
-      // let usuarios = []
+      let usuarios = []
 
-      // localStorage.setItem("usuarios", JSON.stringify(usuarios))
+      localStorage.setItem("usuarios", JSON.stringify(usuarios))
       usuarios = localStorage.getItem("usuarios")
 
       if (usuarios) {
         usuarios = JSON.parse(usuarios)
-
-        for(let i=0 ; i < usuarios.length ; i++){
-          if(usuarios[i].login == 1){
-            document.querySelector('main').innerHTML = panel.template
-            panel.script()
-            document.querySelector('#correo').innerHTML = usuarios[i].email
-          }
-        }  
       } else {
         usuarios = []
       } 
 
       localStorage.setItem("usuarios", JSON.stringify(usuarios))
       
+      for(let i=0 ; i < usuarios.length ; i++){
+        if(usuarios[i].login == 1){
+          document.querySelector('main').innerHTML = panel.template
+          panel.script()
+          document.querySelector('#correo').innerHTML = usuarios[i].email
+        }
+      }
+
       document.querySelector('#login').addEventListener('click', () => {
           document.querySelector('main').innerHTML = login.template
           login.script()
